@@ -21,7 +21,25 @@ const insertText = (text: string) => {
 export function activate(context: vscode.ExtensionContext) {
     console.log('Python Quick Print is now active!');
 
-    let disposable = vscode.commands.registerCommand('extension.print', () => {
+    let disposablePrint = vscode.commands.registerCommand('extension.py_print_selection', () => {
+        const editor = vscode.window.activeTextEditor;
+        if (!editor) { return; }
+
+        const selection = editor.selection;
+        const text = editor.document.getText(selection);
+
+        text
+            ? vscode.commands.executeCommand('editor.action.insertLineAfter')
+                .then(() => {
+                    const logToInsert = `print(f'${text} {type(${text})}: {${text}}')`;
+                    insertText(logToInsert);
+                })
+            : insertText('print()');
+    });
+
+    context.subscriptions.push(disposablePrint);
+
+    let disposableLog = vscode.commands.registerCommand('extension.py_log_selection', () => {
         const editor = vscode.window.activeTextEditor;
         if (!editor) { return; }
 
@@ -36,8 +54,7 @@ export function activate(context: vscode.ExtensionContext) {
                 })
             : insertText('log.info()');
     });
-
-    context.subscriptions.push(disposable);
+    context.subscriptions.push(disposableLog);
 }
 
 export function deactivate() {}

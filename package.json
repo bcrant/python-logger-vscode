@@ -1,8 +1,8 @@
 {
     "name": "python-logger-vscode",
     "displayName": "Python Quick Logger",
-    "description": "Wrap variables with stdlib Logging instances: logger.info().",
-    "version": "0.2.4",
+    "description": "Wrap variables with stdlib Logging instances: log.info().",
+    "version": "0.2.6",
     "publisher": "brian-crant",
     "author": {
         "name": "Brian Crant"
@@ -51,17 +51,29 @@
         ],
         "commands": [
             {
-                "command": "extension.print",
+                "command": "extension.py_log_selection",
+                "title": "Log Python Selection"
+            },
+            {
+                "command": "extension.py_print_selection",
                 "title": "Print Python Selection"
             }
+
         ],
         "keybindings": [
             {
-                "command": "extension.print",
+                "command": "extension.py_log_selection",
                 "key": "ctrl+shift+l",
                 "mac": "cmd+shift+l",
                 "when": "editorTextFocus"
+            },
+            {
+                "command": "extension.py_print_selection",
+                "key": "ctrl+shift+p",
+                "mac": "cmd+shift+p",
+                "when": "editorTextFocus"
             }
+
         ]
     },
     "scripts": {
