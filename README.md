@@ -4,7 +4,16 @@ A fork of [Python Quick Print](https://marketplace.visualstudio.com/items?itemNa
 
 Highlight a variable `foo` you would like to log, enter keyboard `cmd + shift + l`, and on the line below variable, it wrap `foo` as follows:
 ```
-`logger.info(f'foo {type(foo)}: {foo}')`
+import logging
+
+log = logging.getlogger(__name__)
+
+foo = ["a", "b", "c"]
+log.info(f'foo {type(foo)}: {foo}')
+
+----
+
+$ foo <class 'list'>: ["a", "b", "c"]
 ```
 
 I did not update this gif, this shows Python Quick Print. You get the idea...
@@ -20,7 +29,8 @@ This extension is available for free in the [Visual Studio Code Marketplace](htt
 
 * Highlight anything in the editor
 * Press `Cmd+Shift+L` (Mac), or `Ctrl+Shift+L` (Windows)
-* The output (on a new line) will be: `logger.info(f'variable: {variable}')`
+* 
+* The output (on a new line) will be: `log.info(f'variable: {variable}')`
 
 #### Keyboard Shortcut
 By default the keyboard shortcut is `Cmd+Shift+L` or `Ctrl+Shift+L`
